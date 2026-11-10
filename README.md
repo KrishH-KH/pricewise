@@ -30,6 +30,22 @@ The platform features a dynamic pricing interface, customer dashboard, simulated
 - Authenticated customer dashboard endpoint
 - Application health-check endpoint
 
+
+## Application Preview
+
+### Homepage
+![PRICEWISE Homepage](screenshots/homepage.png)
+
+### Pricing Plans
+![PRICEWISE Pricing](screenshots/pricing.png)
+
+### Customer Dashboard
+![Customer Dashboard](screenshots/customer-dashboard.png)
+
+### Admin Dashboard
+![Admin Dashboard](screenshots/admin-dashboard.png)
+
+
 ## Technology Stack
 
 - **Backend:** Python, Flask
