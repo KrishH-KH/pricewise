@@ -1,0 +1,93 @@
+
+{% extends "base.html" %}
+
+{% block title %}Edit {{ plan.name }} | PRICEWISE{% endblock %}
+
+{% block content %}
+
+<section class="admin-section">
+
+    <div class="admin-header">
+        <div>
+            <p class="section-eyebrow">PLAN MANAGEMENT</p>
+            <h1>Edit Pricing Plan</h1>
+            <p class="dashboard-subtitle">
+                Update the pricing and features of {{ plan.name }}.
+            </p>
+        </div>
+
+        <a href="{{ url_for('admin.plans') }}" class="button button-secondary">
+            ← Back to Plans
+        </a>
+    </div>
+
+    <div class="dashboard-panel">
+
+        <form method="POST" class="admin-form">
+
+            <label for="plan-name">Plan Name</label>
+            <input
+                id="plan-name"
+                name="name"
+                type="text"
+                maxlength="100"
+                value="{{ plan.name }}"
+                required
+            >
+
+            <label for="plan-description">Description</label>
+            <textarea
+                id="plan-description"
+                name="description"
+                required
+            >{{ plan.description }}</textarea>
+
+            <label for="monthly-price">Monthly Price (₹)</label>
+            <input
+                id="monthly-price"
+                name="monthly_price"
+                type="number"
+                min="0"
+                step="0.01"
+                value="{{ plan.monthly_price }}"
+                required
+            >
+
+            <label for="yearly-price">Yearly Price (₹)</label>
+            <input
+                id="yearly-price"
+                name="yearly_price"
+                type="number"
+                min="0"
+                step="0.01"
+                value="{{ plan.yearly_price }}"
+                required
+            >
+
+            <label for="plan-features">Features (one per line)</label>
+            <textarea
+                id="plan-features"
+                name="features"
+                required
+            >{{ plan.features|join('\n') }}</textarea>
+
+            <label class="checkbox-label">
+                <input
+                    type="checkbox"
+                    name="is_popular"
+                    {% if plan.is_popular %}checked{% endif %}
+                >
+                Mark as popular
+            </label>
+
+            <button type="submit" class="button button-primary">
+                Save Changes
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+{% endblock %}

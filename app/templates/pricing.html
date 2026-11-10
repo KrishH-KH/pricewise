@@ -1,0 +1,179 @@
+
+{% extends "base.html" %}
+
+{% block title %}Pricing Plans — PRICEWISE{% endblock %}
+
+{% block content %}
+
+<!-- =================================
+     PRICING HERO
+================================== -->
+
+<section class="pricing-hero">
+
+    <div class="pricing-hero-content">
+
+        <span class="section-label">
+            02 / TRANSPARENT PRICING
+        </span>
+
+        <h1>
+            The right plan.<br>
+            <span>The right value.</span>
+        </h1>
+
+        <p>
+            Explore our subscription plans, compare features
+            and choose what works best for you.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =================================
+     PRICING TABLE SECTION
+================================== -->
+
+<section class="pricing-main">
+
+    <div class="pricing-main-heading">
+
+        <div>
+            <span class="section-label">CHOOSE YOUR PLAN</span>
+
+            <h2>Simple plans. Clear choices.</h2>
+
+            <p>
+                Everything you need, with pricing
+                that makes sense.
+            </p>
+        </div>
+
+
+        <!-- BILLING TOGGLE -->
+
+        <div class="billing-area">
+
+            <span class="billing-caption">
+                BILLING CYCLE
+            </span>
+
+            <div class="billing-toggle">
+
+                <button
+                    type="button"
+                    class="billing-option active"
+                    data-cycle="monthly">
+
+                    Monthly
+
+                </button>
+
+                <button
+                    type="button"
+                    class="billing-option"
+                    data-cycle="yearly">
+
+                    Yearly
+
+                </button>
+
+            </div>
+
+            <span class="billing-note">
+                Save with annual billing
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <!-- PRICING CARDS -->
+
+    <div id="pricing-container" class="pricing-grid">
+
+        <div class="loading-message">
+            Loading available plans...
+        </div>
+
+    </div>
+
+
+    <!-- PRICING INFORMATION -->
+
+    <div class="pricing-information">
+
+        <div class="information-icon">
+            i
+        </div>
+
+        <div>
+            <h4>Transparent by design.</h4>
+
+            <p>
+                Prices and plan features are displayed
+                clearly so you can make informed decisions.
+                No real payments are processed in this demo.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =================================
+     COMPARISON CTA
+================================== -->
+
+<section class="comparison-cta">
+
+    <div class="comparison-cta-content">
+
+        <span class="section-label">
+            STILL DECIDING?
+        </span>
+
+        <h2>
+            Compare before<br>
+            you <span>commit.</span>
+        </h2>
+
+        <p>
+            Explore the differences between our plans
+            and understand exactly what you're getting.
+        </p>
+
+        <a href="/compare" class="button-primary">
+            Compare all plans <span>↗</span>
+        </a>
+
+    </div>
+
+    <div class="comparison-decoration">
+        <div class="decoration-circle"></div>
+        <div class="decoration-square"></div>
+    </div>
+
+</section>
+
+
+{% endblock %}
+
+
+{% block extra_js %}
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        if (typeof loadPricingPlans === "function") {
+            loadPricingPlans();
+        }
+
+    });
+</script>
+
+{% endblock %}

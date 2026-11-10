@@ -1,0 +1,128 @@
+
+{% extends "base.html" %}
+
+{% block title %}My Dashboard | PRICEWISE{% endblock %}
+
+{% block content %}
+
+<section class="customer-dashboard">
+
+    <div class="customer-welcome">
+        <div>
+            <span class="section-label">YOUR PRICEWISE ACCOUNT</span>
+            <h1>Welcome back, {{ current_user.name }}.</h1>
+            <p>Manage your subscription and keep track of your account.</p>
+        </div>
+
+        <a href="{{ url_for('main.pricing') }}" class="button-primary">
+            Explore plans ↗
+        </a>
+    </div>
+
+    <div class="customer-stat-grid">
+
+        <article class="customer-stat-card">
+            <span>YOUR PLAN</span>
+            <h2 id="dashboard-plan">No active plan</h2>
+            <p>Current subscription</p>
+        </article>
+
+        <article class="customer-stat-card">
+            <span>SUBSCRIPTION STATUS</span>
+            <h2 id="dashboard-status">Not subscribed</h2>
+            <p>Account status</p>
+        </article>
+
+        <article class="customer-stat-card">
+            <span>BILLING CYCLE</span>
+            <h2 id="dashboard-cycle">—</h2>
+            <p>Payment frequency</p>
+        </article>
+
+        <article class="customer-stat-card">
+            <span>NEXT RENEWAL</span>
+            <h2 id="dashboard-renewal">—</h2>
+            <p>Upcoming renewal</p>
+        </article>
+
+    </div>
+
+    <div class="customer-dashboard-grid">
+
+        <article class="customer-panel">
+            <span class="section-label">SUBSCRIPTION OVERVIEW</span>
+            <h2>Your current plan</h2>
+
+            <div id="subscription-details">
+                <div class="customer-empty-state">
+                    <div class="empty-icon">↗</div>
+                    <h3>Nothing subscribed yet</h3>
+                    <p>Choose a plan to get started with PRICEWISE.</p>
+                    <a href="{{ url_for('main.pricing') }}" class="button-primary">
+                        View pricing plans
+                    </a>
+                </div>
+            </div>
+        </article>
+
+        <article class="customer-panel">
+            <span class="section-label">PROFILE</span>
+            <h2>Account information</h2>
+
+            <div class="profile-detail">
+                <span>Full name</span>
+                <strong>{{ current_user.name }}</strong>
+            </div>
+
+            <div class="profile-detail">
+                <span>Email address</span>
+                <strong>{{ current_user.email }}</strong>
+            </div>
+
+            <div class="profile-detail">
+                <span>Account role</span>
+                <strong>Customer</strong>
+            </div>
+
+            <div class="profile-detail">
+                <span>Member since</span>
+                <strong>{{ current_user.created_at.strftime('%d %b %Y') if current_user.created_at else '—' }}</strong>
+            </div>
+        </article>
+
+    </div>
+
+    <article class="customer-panel customer-transactions">
+        <div class="customer-panel-heading">
+            <div>
+                <span class="section-label">PAYMENT HISTORY</span>
+                <h2>Recent transactions</h2>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Reference</th>
+                        <th>Date</th>
+                        <th>Amount</th>
+                        <th>Payment method</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody id="customer-transactions">
+                    <tr>
+                        <td colspan="5" class="table-empty">
+                            No transactions yet.
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </article>
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,118 @@
+
+{% extends "base.html" %}
+
+{% block title %}Admin Dashboard | PRICEWISE{% endblock %}
+
+{% block content %}
+
+<section class="admin-section">
+
+    <div class="admin-header">
+        <div>
+            <p class="section-eyebrow">PRICEWISE CONTROL CENTER</p>
+            <h1>Admin Dashboard</h1>
+            <p class="dashboard-subtitle">
+                Monitor your platform and manage its activity.
+            </p>
+        </div>
+
+        <span class="admin-role-label">ADMINISTRATOR</span>
+    </div>
+
+    <div class="admin-stats-grid">
+
+        <div class="dashboard-card">
+            <p class="dashboard-card-label">TOTAL USERS</p>
+            <h2>{{ total_users }}</h2>
+            <span class="dashboard-card-note">Registered accounts</span>
+        </div>
+
+        <div class="dashboard-card">
+            <p class="dashboard-card-label">ACTIVE PLANS</p>
+            <h2>{{ total_plans }}</h2>
+            <span class="dashboard-card-note">Available pricing plans</span>
+        </div>
+
+        <div class="dashboard-card">
+            <p class="dashboard-card-label">ACTIVE SUBSCRIPTIONS</p>
+            <h2>{{ total_subscriptions }}</h2>
+            <span class="dashboard-card-note">Currently active subscriptions</span>
+        </div>
+
+        <div class="dashboard-card">
+            <p class="dashboard-card-label">TOTAL REVENUE</p>
+            <h2>₹{{ "{:,.2f}".format(total_revenue|float) }}</h2>
+            <span class="dashboard-card-note">Successful transactions</span>
+        </div>
+
+    </div>
+
+    <div class="admin-content-grid">
+
+        <div class="dashboard-panel">
+            <p class="section-eyebrow">MANAGEMENT</p>
+            <h2>Quick Actions</h2>
+
+            <div class="admin-action-list">
+
+                <a href="{{ url_for('admin.plans') }}" class="admin-action-link">
+                    <span>
+                        <strong>Manage Plans</strong>
+                        <small>Create, edit and update pricing plans</small>
+                    </span>
+                    <span>→</span>
+                </a>
+
+                <a href="{{ url_for('admin.users') }}" class="admin-action-link">
+                    <span>
+                        <strong>Manage Users</strong>
+                        <small>View registered customer accounts</small>
+                    </span>
+                    <span>→</span>
+                </a>
+
+                <a href="{{ url_for('admin.transactions') }}" class="admin-action-link">
+                    <span>
+                        <strong>Transactions</strong>
+                        <small>Review payment records and statuses</small>
+                    </span>
+                    <span>→</span>
+                </a>
+
+            </div>
+        </div>
+
+        <div class="dashboard-panel">
+            <p class="section-eyebrow">PLATFORM STATUS</p>
+            <h2>System Overview</h2>
+
+            <div class="account-details">
+
+                <div class="account-detail-row">
+                    <span>Application</span>
+                    <strong>PRICEWISE</strong>
+                </div>
+
+                <div class="account-detail-row">
+                    <span>Backend</span>
+                    <strong>Flask</strong>
+                </div>
+
+                <div class="account-detail-row">
+                    <span>Database</span>
+                    <strong>SQLite</strong>
+                </div>
+
+                <div class="account-detail-row">
+                    <span>Payment mode</span>
+                    <strong>Simulation</strong>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

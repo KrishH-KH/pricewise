@@ -1,0 +1,275 @@
+
+{% extends "base.html" %}
+
+{% block title %}PRICEWISE — Make Every Price Count{% endblock %}
+
+{% block content %}
+
+<!-- ==============================
+     HERO SECTION
+================================== -->
+
+<section class="hero">
+
+    <div class="hero-container">
+
+        <div class="hero-label">
+            <span class="hero-label-dot"></span>
+            INTELLIGENT PRICING EXPERIENCE
+        </div>
+
+        <h1>
+            Make every<br>
+            price <span>count.</span>
+        </h1>
+
+        <p class="hero-description">
+            Explore smarter subscription plans, understand
+            what you're paying for, and discover the value
+            behind every choice.
+        </p>
+
+        <div class="hero-actions">
+
+            <a href="/pricing" class="button-primary">
+                Explore pricing <span>↗</span>
+            </a>
+
+            <a href="/compare" class="button-secondary">
+                Compare plans
+            </a>
+
+        </div>
+
+        <div class="hero-highlights">
+
+            <span>
+                <span class="highlight-symbol">✳</span>
+                Transparent pricing
+            </span>
+
+            <span>
+                <span class="highlight-symbol">✳</span>
+                Clear comparisons
+            </span>
+
+            <span>
+                <span class="highlight-symbol">✳</span>
+                Better decisions
+            </span>
+
+        </div>
+
+    </div>
+
+    <div class="hero-bottom">
+
+        <span>DESIGNED FOR BETTER DECISIONS</span>
+
+        <span>EXPLORE · COMPARE · CHOOSE</span>
+
+    </div>
+
+</section>
+
+
+<!-- ==============================
+     INTRODUCTION
+================================== -->
+
+<section class="intro-section">
+
+    <div class="section-topline">
+
+        <span class="section-label">01 / THE EXPERIENCE</span>
+
+        <span class="section-description">
+            A better way to understand pricing.
+        </span>
+
+    </div>
+
+    <div class="intro-heading">
+
+        <h2>
+            Clarity in every<br>
+            <span>decision.</span>
+        </h2>
+
+        <p>
+            Choosing a subscription shouldn't feel complicated.
+            PRICEWISE brings everything together so you can
+            explore, compare and make informed choices.
+        </p>
+
+    </div>
+
+
+    <!-- FEATURE CARDS -->
+
+    <div class="feature-grid">
+
+        <article class="feature-card">
+
+            <div class="feature-card-top">
+                <span>01</span>
+                <span class="feature-icon">↗</span>
+            </div>
+
+            <h3>Explore</h3>
+
+            <p>
+                Discover subscription plans designed
+                for different needs and budgets.
+            </p>
+
+            <a href="/pricing" class="feature-link">
+                Explore plans <span>↗</span>
+            </a>
+
+        </article>
+
+
+        <article class="feature-card">
+
+            <div class="feature-card-top">
+                <span>02</span>
+                <span class="feature-icon">⌘</span>
+            </div>
+
+            <h3>Compare</h3>
+
+            <p>
+                Understand the differences between
+                plans and see what each one offers.
+            </p>
+
+            <a href="/compare" class="feature-link">
+                Compare features <span>↗</span>
+            </a>
+
+        </article>
+
+
+        <article class="feature-card">
+
+            <div class="feature-card-top">
+                <span>03</span>
+                <span class="feature-icon">✳</span>
+            </div>
+
+            <h3>Choose</h3>
+
+            <p>
+                Find a subscription that aligns
+                with your requirements and budget.
+            </p>
+
+            <a href="/pricing" class="feature-link">
+                Find your plan <span>↗</span>
+            </a>
+
+        </article>
+
+    </div>
+
+</section>
+
+
+<!-- ==============================
+     PRICING PREVIEW
+================================== -->
+
+<section class="pricing-preview">
+
+    <div class="section-topline">
+
+        <span class="section-label">02 / OUR PLANS</span>
+
+        <span class="section-description">
+            Simple choices. Transparent pricing.
+        </span>
+
+    </div>
+
+
+    <div class="pricing-heading">
+
+        <div>
+            <h2>
+                Find your<br>
+                <span>right fit.</span>
+            </h2>
+
+            <p>
+                Explore our plans and find the features
+                that matter to you.
+            </p>
+        </div>
+
+        <a href="/pricing" class="view-all-link">
+            View all plans <span>↗</span>
+        </a>
+
+    </div>
+
+
+    <!-- Plans will be loaded from Flask REST API -->
+
+    <div id="pricing-container" class="pricing-grid">
+
+        <div class="loading-message">
+            Loading pricing plans...
+        </div>
+
+    </div>
+
+
+</section>
+
+
+<!-- ==============================
+     FINAL CALL TO ACTION
+================================== -->
+
+<section class="closing-section">
+
+    <div class="closing-content">
+
+        <span class="section-label">MAKE A BETTER CHOICE</span>
+
+        <h2>
+            Your next decision<br>
+            starts <span>here.</span>
+        </h2>
+
+        <p>
+            Explore your options and discover
+            a clearer way to choose.
+        </p>
+
+        <a href="/pricing" class="button-primary">
+            Discover pricing <span>↗</span>
+        </a>
+
+    </div>
+
+</section>
+
+
+{% endblock %}
+
+
+{% block extra_js %}
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        if (typeof loadPricingPlans === "function") {
+            loadPricingPlans();
+        }
+
+    });
+</script>
+
+{% endblock %}

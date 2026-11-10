@@ -1,0 +1,189 @@
+
+{% extends "base.html" %}
+
+{% block title %}Manage Plans | PRICEWISE{% endblock %}
+
+{% block content %}
+<section class="admin-section">
+
+    <div class="admin-header">
+        <div>
+            <p class="section-eyebrow">ADMINISTRATION</p>
+            <h1>Manage Pricing Plans</h1>
+            <p class="dashboard-subtitle">
+                Create and manage your subscription plans.
+            </p>
+        </div>
+
+        <a href="{{ url_for('admin.dashboard') }}" class="button button-secondary">
+            ← Dashboard
+        </a>
+    </div>
+
+    <div class="dashboard-panel">
+
+        <div class="panel-heading">
+            <h2>Available Plans</h2>
+
+            <button
+                type="button"
+                class="button button-primary"
+                id="show-add-plan"
+                onclick="document.getElementById('add-plan-panel').hidden = false;"
+            >
+                + Add New Plan
+            </button>
+        </div>
+
+        <div class="table-responsive">
+            {% if plans %}
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Plan</th>
+                        <th>Monthly</th>
+                        <th>Yearly</th>
+                        <th>Features</th>
+                        <th>Popularity</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for plan in plans %}
+                    <tr>
+                        <td>
+                            <strong>{{ plan.name }}</strong>
+                            <br>
+                            <small>{{ plan.description }}</small>
+                        </td>
+
+                        <td>₹{{ "%.2f"|format(plan.monthly_price) }}</td>
+                        <td>₹{{ "%.2f"|format(plan.yearly_price) }}</td>
+
+                        <td>
+                            {{ plan.features|length }} features
+                        </td>
+
+                        <td>
+                            {% if plan.is_popular %}
+                                <span class="status-badge">Popular</span>
+                            {% else %}
+                                —
+                            {% endif %}
+                        </td>
+
+                        <td>
+                            {% if plan.is_active %}
+                                Active
+                            {% else %}
+                                Inactive
+                            {% endif %}
+                        </td>
+                        <td>
+    <a
+        href="{{ url_for('admin.edit_plan', plan_id=plan.id) }}"
+        class="button button-secondary"
+    >
+        Edit
+    </a>
+
+    <form
+        method="POST"
+        action="{{ url_for('admin.toggle_plan', plan_id=plan.id) }}"
+        style="display:inline;"
+    >
+        <button type="submit" class="button button-secondary">
+            {{ "Deactivate" if plan.is_active else "Activate" }}
+        </button>
+    </form>
+</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            {% else %}
+                <p class="table-empty">No pricing plans have been created yet.</p>
+            {% endif %}
+        </div>
+
+    </div>
+
+    <div class="dashboard-panel" id="add-plan-panel" hidden>
+        <h2>Add a New Plan</h2>
+
+        <form
+            id="add-plan-form"
+            class="admin-form"
+            method="POST"
+            action="{{ url_for('admin.plans') }}"
+        >
+
+            <label for="plan-name">Plan Name</label>
+            <input
+                id="plan-name"
+                name="name"
+                type="text"
+                maxlength="100"
+                required
+            >
+
+            <label for="plan-description">Description</label>
+            <textarea
+                id="plan-description"
+                name="description"
+                required
+            ></textarea>
+
+            <label for="monthly-price">Monthly Price (₹)</label>
+            <input
+                id="monthly-price"
+                name="monthly_price"
+                type="number"
+                min="0"
+                step="0.01"
+                required
+            >
+
+            <label for="yearly-price">Yearly Price (₹)</label>
+            <input
+                id="yearly-price"
+                name="yearly_price"
+                type="number"
+                min="0"
+                step="0.01"
+                required
+            >
+
+            <label for="plan-features">Features (one per line)</label>
+            <textarea
+                id="plan-features"
+                name="features"
+                placeholder="Feature one&#10;Feature two&#10;Feature three"
+                required
+            ></textarea>
+
+            <label class="checkbox-label">
+                <input type="checkbox" name="is_popular">
+                Mark as popular
+            </label>
+
+            <button type="submit" class="button button-primary">
+                Save Plan
+            </button>
+
+            <button
+                type="button"
+                class="button button-secondary"
+                onclick="document.getElementById('add-plan-panel').hidden = true;"
+            >
+                Cancel
+            </button>
+
+        </form>
+    </div>
+
+</section>
+{% endblock %}

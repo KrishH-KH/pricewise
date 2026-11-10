@@ -1,0 +1,178 @@
+
+{% extends "base.html" %}
+
+{% block title %}Create Account — PRICEWISE{% endblock %}
+
+{% block content %}
+
+<section class="auth-section">
+
+    <div class="auth-decoration">
+
+        <span class="section-label">PRICEWISE / GET STARTED</span>
+
+        <h1>
+            Start making<br>
+            <span>better choices.</span>
+        </h1>
+
+        <p>
+            Create your account and explore
+            a smarter subscription experience.
+        </p>
+
+        <div class="auth-decoration-bottom">
+            <span>EXPLORE.</span>
+            <span>COMPARE.</span>
+            <span>CHOOSE.</span>
+        </div>
+
+    </div>
+
+
+    <div class="auth-form-area">
+
+        <div class="auth-form-container">
+
+            <span class="section-label">JOIN PRICEWISE</span>
+
+            <h2>Create account</h2>
+
+            <p class="auth-subtitle">
+                Enter your details to get started.
+            </p>
+
+
+            <form method="POST" action="/auth/register" class="auth-form">
+
+                <div class="form-group">
+
+                    <label for="name">Full name</label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        placeholder="Your full name"
+                        autocomplete="name"
+                        maxlength="100"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="email">Email address</label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="you@example.com"
+                        autocomplete="email"
+                        maxlength="150"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="password">Password</label>
+
+                    <div class="password-wrapper">
+
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Create a password"
+                            autocomplete="new-password"
+                            minlength="8"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            class="password-toggle"
+                            data-target="password"
+                            aria-label="Show password">
+                            Show
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="confirm_password">
+                        Confirm password
+                    </label>
+
+                    <div class="password-wrapper">
+
+                        <input
+                            type="password"
+                            id="confirm_password"
+                            name="confirm_password"
+                            placeholder="Re-enter your password"
+                            autocomplete="new-password"
+                            minlength="8"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            class="password-toggle"
+                            data-target="confirm_password"
+                            aria-label="Show password">
+                            Show
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <button type="submit" class="auth-submit">
+                    Create account <span>↗</span>
+                </button>
+
+            </form>
+
+
+            <div class="auth-switch">
+                Already have an account?
+                <a href="/auth/login">Sign in</a>
+            </div>
+
+
+            <a href="/" class="auth-back">
+                ← Back to homepage
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}
+
+
+{% block extra_js %}
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        if (typeof initializePasswordToggles === "function") {
+            initializePasswordToggles();
+        }
+    });
+</script>
+
+{% endblock %}

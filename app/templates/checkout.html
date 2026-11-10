@@ -1,0 +1,111 @@
+
+{% extends "base.html" %}
+
+{% block title %}Checkout | PRICEWISE{% endblock %}
+
+{% block content %}
+
+<section class="checkout-section">
+
+    <div class="checkout-heading">
+        <span class="section-label">PRICEWISE / SECURE CHECKOUT</span>
+        <h1>Complete your <span>subscription.</span></h1>
+        <p>Review your plan and complete the demo payment.</p>
+    </div>
+
+    <div class="checkout-grid">
+
+        <div class="checkout-panel">
+            <span class="section-label">ORDER SUMMARY</span>
+            <h2>{{ plan.name }} Plan</h2>
+            <p class="checkout-description">{{ plan.description }}</p>
+
+            <div class="checkout-price">
+                <strong id="checkout-price">₹{{ "%.2f"|format(amount) }}</strong>
+                <span>/ {{ billing_cycle }}</span>
+            </div>
+
+            <div class="checkout-divider"></div>
+
+            <div class="checkout-detail">
+                <span>Billing cycle</span>
+                <strong>{{ billing_cycle|capitalize }}</strong>
+            </div>
+
+            <div class="checkout-detail">
+                <span>Customer</span>
+                <strong>{{ current_user.name }}</strong>
+            </div>
+
+            <div class="checkout-detail">
+                <span>Email</span>
+                <strong>{{ current_user.email }}</strong>
+            </div>
+
+            <div class="checkout-features">
+                <h3>Included features</h3>
+                {% for feature in plan.features %}
+                    <p>✓ {{ feature }}</p>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="checkout-panel checkout-payment-panel">
+
+            <span class="section-label">PAYMENT DETAILS</span>
+            <h2>Demo payment</h2>
+            <p class="checkout-description">
+                This is a simulated transaction. No real payment will be taken.
+            </p>
+
+            <form method="POST" action="{{ url_for('main.checkout', plan_id=plan.id) }}">
+
+                <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+                
+                <label for="billing_cycle">Billing cycle</label>
+                <select name="billing_cycle" id="billing_cycle">
+                    <option value="monthly" {% if billing_cycle == "monthly" %}selected{% endif %}>
+                        Monthly
+                    </option>
+                    <option value="yearly" {% if billing_cycle == "yearly" %}selected{% endif %}>
+                        Yearly
+                    </option>
+                </select>
+
+                <label for="coupon_code">Coupon code (optional)</label>
+                <input
+                    type="text"
+                    id="coupon_code"
+                    name="coupon_code"
+                    placeholder="Enter coupon code"
+                    maxlength="40"
+                >
+
+                <label for="payment_method">Payment method</label>
+                <select name="payment_method" id="payment_method">
+                    <option value="demo">Demo payment</option>
+                    <option value="upi_demo">UPI (simulation)</option>
+                    <option value="card_demo">Card (simulation)</option>
+                </select>
+
+                <div class="checkout-total">
+                    <span>Final amount</span>
+                    <strong id="checkout-total">₹{{ "%.2f"|format(amount) }}</strong>
+                </div>
+
+                <button type="submit" class="button button-primary checkout-submit">
+                    Confirm demo payment ↗
+                </button>
+
+                <p class="checkout-disclaimer">
+                    Demo only. No card or UPI details are collected.
+                </p>
+
+            </form>
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

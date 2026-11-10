@@ -1,0 +1,143 @@
+
+{% extends "base.html" %}
+
+{% block title %}Compare Plans — PRICEWISE{% endblock %}
+
+{% block content %}
+
+<!-- =================================
+     COMPARISON HERO
+================================== -->
+
+<section class="compare-hero">
+
+    <div class="compare-hero-content">
+
+        <span class="section-label">
+            03 / SIDE-BY-SIDE COMPARISON
+        </span>
+
+        <h1>
+            See the difference.<br>
+            <span>Choose with clarity.</span>
+        </h1>
+
+        <p>
+            Every plan has something different to offer.
+            Compare features, understand the value
+            and find the right fit for your needs.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =================================
+     COMPARISON SECTION
+================================== -->
+
+<section class="compare-main">
+
+    <div class="compare-heading">
+
+        <div>
+            <span class="section-label">
+                FEATURE COMPARISON
+            </span>
+
+            <h2>Everything, side by side.</h2>
+
+            <p>
+                A closer look at what each subscription includes.
+            </p>
+        </div>
+
+        <a href="/pricing" class="compare-back-link">
+            View pricing <span>↗</span>
+        </a>
+
+    </div>
+
+
+    <!-- DYNAMIC COMPARISON TABLE -->
+
+    <div class="comparison-table-wrapper">
+
+        <div id="comparison-container">
+
+            <div class="loading-message">
+                Preparing plan comparison...
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- COMPARISON LEGEND -->
+
+    <div class="comparison-legend">
+
+        <div class="legend-item">
+            <span class="legend-check">✓</span>
+            <span>Feature included</span>
+        </div>
+
+        <div class="legend-item">
+            <span class="legend-cross">—</span>
+            <span>Not included</span>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =================================
+     DECISION SECTION
+================================== -->
+
+<section class="compare-decision">
+
+    <div class="decision-content">
+
+        <span class="section-label">
+            YOUR NEXT STEP
+        </span>
+
+        <h2>
+            The right choice<br>
+            starts with <span>clarity.</span>
+        </h2>
+
+        <p>
+            Now that you've explored the differences,
+            find the subscription that works for you.
+        </p>
+
+        <a href="/pricing" class="button-primary">
+            Explore subscription plans <span>↗</span>
+        </a>
+
+    </div>
+
+</section>
+
+
+{% endblock %}
+
+
+{% block extra_js %}
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        if (typeof loadComparison === "function") {
+            loadComparison();
+        }
+
+    });
+</script>
+
+{% endblock %}

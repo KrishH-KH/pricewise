@@ -1,0 +1,91 @@
+
+{% extends "base.html" %}
+
+{% block title %}Transactions | PRICEWISE{% endblock %}
+
+{% block content %}
+<section class="admin-section">
+
+    <div class="admin-header">
+        <div>
+            <p class="section-eyebrow">ADMINISTRATION</p>
+            <h1>Transactions</h1>
+            <p class="dashboard-subtitle">
+                Monitor payment activity across the platform.
+            </p>
+        </div>
+
+        <a href="{{ url_for('admin.dashboard') }}" class="button button-secondary">
+            ← Dashboard
+        </a>
+    </div>
+
+    <div class="dashboard-panel">
+        <div class="panel-heading">
+            <h2>Payment History</h2>
+            <span>{{ transactions|length }} transactions</span>
+        </div>
+
+        <div class="table-responsive">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Reference</th>
+                        <th>Customer</th>
+                        <th>Amount</th>
+                        <th>Payment Method</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for transaction in transactions %}
+                    <tr>
+                        <td>
+                            <strong>{{ transaction.reference }}</strong>
+                        </td>
+
+                        <td>
+                            {% if transaction.user %}
+                                {{ transaction.user.name }}
+                                <br>
+                                <small>{{ transaction.user.email }}</small>
+                            {% else %}
+                                Unknown customer
+                            {% endif %}
+                        </td>
+
+                        <td>
+                            ₹{{ "%.2f"|format(transaction.amount) }}
+                        </td>
+
+                        <td>
+                            {{ transaction.payment_method|replace("_", " ")|title }}
+                        </td>
+
+                        <td>
+                            {{ transaction.created_at.strftime("%d %b %Y, %I:%M %p") if transaction.created_at else "—" }}
+                        </td>
+
+                        <td>
+                            <span class="status-badge">
+                                {{ transaction.status|title }}
+                            </span>
+                        </td>
+                    </tr>
+
+                    {% else %}
+                    <tr>
+                        <td colspan="6" class="table-empty">
+                            No transactions have been recorded yet.
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</section>
+{% endblock %}

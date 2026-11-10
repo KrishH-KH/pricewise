@@ -1,0 +1,69 @@
+
+{% extends "base.html" %}
+
+{% block title %}Manage Users | PRICEWISE{% endblock %}
+
+{% block content %}
+<section class="admin-section">
+
+    <div class="admin-header">
+        <div>
+            <p class="section-eyebrow">ADMINISTRATION</p>
+            <h1>Manage Users</h1>
+            <p class="dashboard-subtitle">View and monitor registered accounts.</p>
+        </div>
+
+        <a href="{{ url_for('admin.dashboard') }}" class="button button-secondary">
+            ← Dashboard
+        </a>
+    </div>
+
+    <div class="dashboard-panel">
+        <div class="panel-heading">
+            <h2>Registered Users</h2>
+            <span>{{ users|length }} users</span>
+        </div>
+
+        <div class="table-responsive">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Joined</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for user in users %}
+                    <tr>
+                        <td>#{{ user.id }}</td>
+                        <td><strong>{{ user.name }}</strong></td>
+                        <td>{{ user.email }}</td>
+                        <td>
+                            {% if user.role == "admin" %}
+                                <span class="status-badge">Admin</span>
+                            {% else %}
+                                Customer
+                            {% endif %}
+                        </td>
+                        <td>
+                            {{ user.created_at.strftime("%d %b %Y") if user.created_at else "—" }}
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="5" class="table-empty">
+                            No registered users found.
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</section>
+{% endblock %}
