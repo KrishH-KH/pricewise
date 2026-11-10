@@ -73,7 +73,7 @@ The platform features a dynamic pricing interface, customer dashboard, simulated
 Clone the repository:
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/pricewise.git
+git clone https://github.com/KrishH-KH/pricewise.git
 cd pricewise
 ```
 
@@ -121,7 +121,7 @@ The checkout workflow is simulated for demonstration purposes. No real payments 
 
 Computer Science & Engineering Student
 
-GitHub: https://github.com/
+GitHub: https://github.com/KrishH-KH
 
 ---
 
